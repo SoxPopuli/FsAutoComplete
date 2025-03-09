@@ -825,7 +825,16 @@ module SignatureFormatter =
           basicName ++ "=" ++ $"({typeNames})"
         else
           let unannotatedType = fse.UnAnnotate()
-          basicName ++ "=" ++ (unannotatedType.DisplayName)
+
+          if unannotatedType.GenericArguments.Count > 0 then
+            let args =
+              ParameterType.getGenericArgumentTypes fse.AbbreviatedType
+              |> List.map ParameterType.displayName
+              |> String.join ", "
+
+            basicName ++ "=" ++ unannotatedType.DisplayName + $"<{args}>"
+          else
+            basicName ++ "=" ++ (unannotatedType.DisplayName)
       else
         basicName
 

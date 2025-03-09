@@ -655,7 +655,20 @@ let tooltipTests state =
           verifySignature
             110u
             7u
-            "val functionAliasValue: int -> int" ] ]
+            "val functionAliasValue: int -> int"
+
+          verifySignature
+            111u
+            6u
+            (concatLines
+              [ "type ResultAlias = Result<option<int>, string>"
+                "  property IsOk:  bool"
+                "  property IsError:  bool" ])
+
+          verifySignature
+            112u
+            6u
+            "type AsyncAlias = Async<Result<option<int>, string>>" ] ]
 
 let closeTests state =
   // Note: clear diagnostics also implies clear caches (-> remove file & project options from State).

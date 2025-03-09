@@ -109,3 +109,5 @@ type GenericFunctionTupleAlias<'T> = 'T -> ('T * string)
 type StructTupleAlias = (struct (int * string))
 type StructFunctionTupleAlias = int -> (struct (int * string))
 let functionAliasValue: FunctionAlias = fun _ -> 2
+type ResultAlias = Result<int option, string>
+type AsyncAlias = Async<Result<int option, string>>
