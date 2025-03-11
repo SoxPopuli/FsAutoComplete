@@ -130,7 +130,7 @@ module TypedAstExtensionHelpers =
 
     member x.UnAnnotate() =
       let rec realEntity (s: FSharpEntity) =
-        if s.IsFSharpAbbreviation then
+        if s.IsFSharpAbbreviation && s.AbbreviatedType.HasTypeDefinition then
           realEntity s.AbbreviatedType.TypeDefinition
         else
           s

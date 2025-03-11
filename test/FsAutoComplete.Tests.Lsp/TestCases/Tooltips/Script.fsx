@@ -109,5 +109,11 @@ type GenericFunctionTupleAlias<'T> = 'T -> ('T * string)
 type StructTupleAlias = (struct (int * string))
 type StructFunctionTupleAlias = int -> (struct (int * string))
 let functionAliasValue: FunctionAlias = fun _ -> 2
-type ResultAlias = Result<int option, string>
 type AsyncAlias = Async<Result<int option, string>>
+
+open System.Threading.Tasks
+open System.Threading
+
+type CancellableTask<'T> = CancellationToken -> Task<'T>
+type Validation<'A, 'B> = Result<'A, 'B>
+type CancellableTaskValidation<'T, 'Error> = CancellableTask<Validation<'T, 'Error>>

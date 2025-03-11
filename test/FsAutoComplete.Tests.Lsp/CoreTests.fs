@@ -660,15 +660,12 @@ let tooltipTests state =
           verifySignature
             111u
             6u
-            (concatLines
-              [ "type ResultAlias = Result<option<int>, string>"
-                "  property IsOk:  bool"
-                "  property IsError:  bool" ])
+            "type AsyncAlias = Async<Result<option<int>, string>>"
 
           verifySignature
-            112u
+            118u
             6u
-            "type AsyncAlias = Async<Result<option<int>, string>>" ] ]
+            "type CancellableTaskValidation<'T,'Error> = CancellationToken -> Task<'T>" ] ]
 
 let closeTests state =
   // Note: clear diagnostics also implies clear caches (-> remove file & project options from State).

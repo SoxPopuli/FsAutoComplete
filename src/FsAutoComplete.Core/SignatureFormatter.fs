@@ -826,7 +826,14 @@ module SignatureFormatter =
         else
           let unannotatedType = fse.UnAnnotate()
 
-          if unannotatedType.GenericArguments.Count > 0 then
+          if unannotatedType.IsFSharpAbbreviation then
+            let displayName =
+              unannotatedType.AbbreviatedType
+              |> ParameterType.getParameterType
+              |> ParameterType.displayNameUnAnnotated
+
+            basicName ++ "=" ++ displayName
+          else if unannotatedType.GenericArguments.Count > 0 then
             let args =
               ParameterType.getGenericArgumentTypes fse.AbbreviatedType
               |> List.map ParameterType.displayName
